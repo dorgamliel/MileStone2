@@ -3,6 +3,6 @@
 //
 
 #include "DFS.h"
-string Searcher::search(Searchable* searchable){
+vector<pair <int, int>> DFS::search(Searchable* searchable){
 
 }

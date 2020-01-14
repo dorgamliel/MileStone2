@@ -9,7 +9,7 @@
 #include "Searcher.h"
 
 class DFS : public Searcher{
-    string search(Searchable* searchable);
+    vector<pair <int, int>> search(Searchable* searchable);
 };
 
 

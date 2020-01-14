@@ -3,6 +3,6 @@
 //
 
 #include "BestFS.h"
-string Searcher::search(Searchable* searchable){
+vector<pair <int, int>> BestFS::search(Searchable* searchable){
 
 }

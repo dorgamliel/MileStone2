@@ -9,7 +9,7 @@
 #include "Searcher.h"
 
 class BestFS : public Searcher{
-    string search(Searchable* searchable);
+    vector<pair <int, int>> search(Searchable* searchable);
 };
 
 
