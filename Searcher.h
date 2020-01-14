@@ -11,7 +11,7 @@
 using namespace std;
 
 class Searcher {
-    virtual string search(Searchable s) = 0;
+    virtual string search(Searchable* s) = 0;
 };
 
 

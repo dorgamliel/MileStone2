@@ -4,5 +4,5 @@
 
 #include "BestFS.h"
 string Searcher::search(Searchable* searchable){
-    
+
 }

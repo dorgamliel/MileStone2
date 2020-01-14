@@ -13,6 +13,9 @@ using namespace std;
 class Searchable {
 public:
     virtual vector<string> getNeighbours() = 0;
+    virtual int countVertices() = 0;
+    virtual string getPath() = 0;
+    virtual int getTotalCost() =0;
 };
 
 
