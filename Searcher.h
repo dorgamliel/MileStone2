@@ -5,9 +5,13 @@
 #ifndef TEMPFORSERVER_SEARCHER_H
 #define TEMPFORSERVER_SEARCHER_H
 
+#include <string>
+#include "Searchable.h"
+
+using namespace std;
 
 class Searcher {
-
+    virtual string search(Searchable s) = 0;
 };
 
 

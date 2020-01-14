@@ -8,6 +8,7 @@
 #include "MyTestClientHandler.h"
 
 void MyTestClientHandler::handleClient() {
+
     string solution;
     std::istringstream valueStream;
     is_done = false;
@@ -39,6 +40,7 @@ void MyTestClientHandler::handleClient() {
             cm->insert(str, solution);
             cout<<"Created a new file. " <<solution<<endl;
         }
+        fill_n(buffer, sizeof(buffer), 0);
     }
     close(this->client_socket);
 }
