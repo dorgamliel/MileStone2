@@ -26,7 +26,7 @@ public:
             if (visited.find(vertex) == visited.end()) {
                 s->setCost(state->getCost() + searchable->getCost(state, s));
                 s->setCameFrom(state);
-                DFSOper(s, searchable, visited);
+                return DFSOper(s, searchable, visited);
             }
         }
 

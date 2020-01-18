@@ -64,6 +64,24 @@ namespace test1 { // ? delete it
             m.setCosts(&costs);
             DFS<pair<int, int>> dfs;
             vector<State<pair<int,int>>*> resPath = dfs.search(&m);
+            string direction;
+            while (!resPath.empty()) {
+                auto s = resPath[resPath.size()-1];
+                resPath.pop_back();
+                auto parent = s->getCameFrom();
+                if (parent == NULL) {
+                    direction = "";
+                } else if (parent->getState().first == s->getState().first + 1) {
+                    direction = "Up";
+                } else if (parent->getState().first == s->getState().first - 1) {
+                    direction = "Down";
+                } else if (parent->getState().second == s->getState().second + 1) {
+                    direction = "Left";
+                } else if (parent->getState().second == s->getState().second - 1) {
+                    direction = "Right";
+                }
+                cout << "Direction:" + direction +  "; Location: [" + to_string(s->getState().first) + ", " + to_string(s->getState().second) + "];" + "Total cost: " + to_string(s->getCost()) << endl;
+            }
             return 0;
         }
     };

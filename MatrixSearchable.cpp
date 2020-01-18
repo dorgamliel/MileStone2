@@ -11,7 +11,7 @@ vector<State<pair<int, int>>*> MatrixSearchable::getNeighbours(State<pair<int, i
     vector<State<pair<int, int>>*> vector;
     int i = s->getState().first;
     int j = s->getState().second;
-    if (i != this->size.first)  {
+    if (i != this->size.first && (*costs)[i+1][j] != -1)  {
         auto* s1 = new State<pair<int, int>>({i+1, j});
         vector.push_back(s1);
     }

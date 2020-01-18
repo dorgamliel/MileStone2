@@ -12,7 +12,7 @@ using namespace std;
 template <typename T>
 class State {
     T state;
-    double cost = 0;
+    int cost = 0;
     State<T>* cameFrom = NULL;
 public:
     State(T state){ this->state = state; }
@@ -24,7 +24,7 @@ public:
     void setCameFrom(State<T>* parent) {
         this->cameFrom = parent;
     }
-    double getCost() {
+    int getCost() {
         return this->cost;
     }
     State<T>* getCameFrom() {
