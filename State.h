@@ -12,12 +12,24 @@ using namespace std;
 template <typename T>
 class State {
     T state;
-    double cost;
-    State<T>* cameFrom;
+    double cost = 0;
+    State<T>* cameFrom = NULL;
 public:
     State(T state){ this->state = state; }
     T getState(){ return this->state; }
     bool operator==(State<T> const &secondState) const { return state == secondState.state; }
+    void setCost(double c) {
+        this->cost = c;
+    }
+    void setCameFrom(State<T>* parent) {
+        this->cameFrom = parent;
+    }
+    double getCost() {
+        return this->cost;
+    }
+    State<T>* getCameFrom() {
+        return this->cameFrom;
+    }
 };
 
 
