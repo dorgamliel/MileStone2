@@ -2,8 +2,8 @@
 // Created by dorgamliel on 13/01/2020.
 //
 
-#ifndef TEMPFORSERVER_STRINGREVERSER_H
-#define TEMPFORSERVER_STRINGREVERSER_H
+#ifndef MILESTONE2_STRINGREVERSER_H
+#define MILESTONE2_STRINGREVERSER_H
 
 using namespace std;
 
@@ -17,4 +17,4 @@ public:
 };
 
 
-#endif //TEMPFORSERVER_STRINGREVERSER_H
+#endif //MILESTONE2_STRINGREVERSER_H

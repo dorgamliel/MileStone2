@@ -2,15 +2,17 @@
 // Created by dorgamliel on 14/01/2020.
 //
 
-#ifndef TEMPFORSERVER_DFS_H
-#define TEMPFORSERVER_DFS_H
+#ifndef MILESTONE2_DFS_H
+#define MILESTONE2_DFS_H
 
 
 #include "Searcher.h"
-
-class DFS : public Searcher{
-    vector<pair <int, int>> search(Searchable* searchable);
+template<typename T>
+class DFS : public Searcher<T>{
+public:
+    vector<State<T>*> search(Searchable<T>* searchable);
+    void DFSOper(State<T> state, Searchable<T>* searchable, bool* visited);
 };
 
 
-#endif //TEMPFORSERVER_DFS_H
+#endif //MILESTONE2_DFS_H

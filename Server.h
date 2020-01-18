@@ -2,8 +2,8 @@
 // Created by dorgamliel on 09/01/2020.
 //
 
-#ifndef TEMPFORSERVER_SERVER_H
-#define TEMPFORSERVER_SERVER_H
+#ifndef MILESTONE2_SERVER_H
+#define MILESTONE2_SERVER_H
 
 #include "ClientHandler.h"
 
@@ -13,7 +13,7 @@ namespace server_side {
     protected:
         int server_socket;
     public:
-        virtual void open(int, ClientHandler*) = 0; // opens server connection and waits for for clients.
+        virtual void start(int, ClientHandler*) = 0; // opens server connection and waits for for clients.
         virtual void stop() = 0; // close server.
     };
 }
@@ -25,4 +25,4 @@ namespace boot {
     };
 }
 
-#endif //TEMPFORSERVER_SERVER_H
+#endif //MILESTONE2_SERVER_H

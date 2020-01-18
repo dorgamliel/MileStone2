@@ -2,8 +2,8 @@
 // Created by dorgamliel on 11/01/2020.
 //
 
-#ifndef TEMPFORSERVER_CACHEMANAGER_H
-#define TEMPFORSERVER_CACHEMANAGER_H
+#ifndef MILESTONE2_CACHEMANAGER_H
+#define MILESTONE2_CACHEMANAGER_H
 #include <string>
 using namespace std;
 
@@ -14,4 +14,4 @@ public:
 };
 
 
-#endif //TEMPFORSERVER_CACHEMANAGER_H
+#endif //MILESTONE2_CACHEMANAGER_H

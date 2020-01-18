@@ -10,7 +10,7 @@
 
 #define MAX_WAIT 5
 
-void MySerialServer:: open(int port, ClientHandler* c) {
+void MySerialServer:: start(int port, ClientHandler* c) {
     server_socket = socket(AF_INET, SOCK_STREAM, 0);
     sockaddr_in address;
     address.sin_family = AF_INET;
@@ -57,7 +57,7 @@ namespace boot{
         auto* solver = new StringReverser();
         auto* c = new MyTestClientHandler(solver, cache);
         MySerialServer server;
-        server.open(5401, c);
+        server.start(5401, c);
     }
 
 };

@@ -2,8 +2,8 @@
 // Created by dorgamliel on 11/01/2020.
 //
 
-#ifndef TEMPFORSERVER_FILECACHEMANAGER_H
-#define TEMPFORSERVER_FILECACHEMANAGER_H
+#ifndef MILESTONE2_FILECACHEMANAGER_H
+#define MILESTONE2_FILECACHEMANAGER_H
 
 #include <unordered_map>
 #include <list>
@@ -16,4 +16,4 @@ public:
 };
 
 
-#endif //TEMPFORSERVER_FILECACHEMANAGER_H
+#endif //MILESTONE2_FILECACHEMANAGER_H

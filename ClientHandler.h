@@ -1,8 +1,8 @@
 //
 // Created by dorgamliel on 09/01/2020.
 //
-#ifndef TEMPFORSERVER_CLIENTHANDLER_H
-#define TEMPFORSERVER_CLIENTHANDLER_H
+#ifndef MILESTONE2_CLIENTHANDLER_H
+#define MILESTONE2_CLIENTHANDLER_H
 #include <istream>
 #include "CacheManager.h"
 #include "Solver.h"
@@ -22,4 +22,4 @@ public:
 };
 
 
-#endif //TEMPFORSERVER_CLIENTHANDLER_H
+#endif //MILESTONE2_CLIENTHANDLER_H

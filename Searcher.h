@@ -2,17 +2,16 @@
 // Created by dorgamliel on 14/01/2020.
 //
 
-#ifndef TEMPFORSERVER_SEARCHER_H
-#define TEMPFORSERVER_SEARCHER_H
+#ifndef MILESTONE2_SEARCHER_H
+#define MILESTONE2_SEARCHER_H
 
 #include <string>
 #include "Searchable.h"
-
-using namespace std;
-
+template <typename T>
 class Searcher {
-    virtual vector<pair <int, int>> search(Searchable* s) = 0;
+public:
+    virtual vector<State<T>*> search(Searchable<T>* s) = 0;
 };
 
 
-#endif //TEMPFORSERVER_SEARCHER_H
+#endif //MILESTONE2_SEARCHER_H

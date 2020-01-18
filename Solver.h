@@ -2,8 +2,8 @@
 // Created by dorgamliel on 11/01/2020.
 //
 
-#ifndef TEMPFORSERVER_SOLVER_H
-#define TEMPFORSERVER_SOLVER_H
+#ifndef MILESTONE2_SOLVER_H
+#define MILESTONE2_SOLVER_H
 template <typename P, typename S>
 class Solver {
 protected:
@@ -15,4 +15,4 @@ public:
 };
 
 
-#endif //TEMPFORSERVER_SOLVER_H
+#endif //MILESTONE2_SOLVER_H

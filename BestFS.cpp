@@ -3,6 +3,7 @@
 //
 
 #include "BestFS.h"
-vector<pair <int, int>> BestFS::search(Searchable* searchable){
+template <typename T>
+void BestFS<T>::search(Searchable<T>* searchable){
 
 }
