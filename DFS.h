@@ -20,9 +20,11 @@ public:
             return createPath(state);
         }
         visited[state->getState()] = true;
+        //add all state's neighbours to a vector and iterate it.
         vector<State<T>*> allNeighbours = searchable->getNeighbours(state);
         for (auto s : allNeighbours) {
             T vertex = s->getState();
+            //if neighbour wasn't iterated before, update cost to reach it and where it came from.
             if (visited.find(vertex) == visited.end()) {
                 s->setCost(state->getCost() + searchable->getCost(state, s));
                 s->setCameFrom(state);
