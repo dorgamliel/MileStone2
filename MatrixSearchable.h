@@ -25,7 +25,9 @@ public:
 namespace test1 { // ? delete it
     class Main {
     public:
+        // testing DFS algorithm by reading matrix for 'matrix_test.txt' file and running DFS on it
         int main(int, char*[]){
+
 
             ifstream file;
             file.open("matrix_test.txt", ios::in);
@@ -35,6 +37,7 @@ namespace test1 { // ? delete it
             istringstream valueStream;
             string singleValue;
             vector<vector<int>> costs;
+            // read file by lines
             while (file) {
                 vector<int> singleRow;
                 getline(file, line);
@@ -42,18 +45,23 @@ namespace test1 { // ? delete it
                 if (line == "end") {
                     break;
                 }
+                // split each line into cells and put each cell cost into 'costs' vector
                 while (std::getline(valueStream, singleValue, ','))
                 {
                     singleRow.push_back(stoi(singleValue));
                 }
                 costs.push_back(singleRow);
             }
+            // get start and target cells, and remove
             pair<int, int> target(costs[costs.size()-1][0], costs[costs.size()-1][1]);
             pair<int, int> start(costs[costs.size()-2][0], costs[costs.size()-2][1]);
+            // remove start and target info lines from 'costs' vector
             costs.pop_back();
             costs.pop_back();
+            // initialize searchable matrix problem
             State<pair<int, int>> startState(start);
             State<pair<int, int>> targetState(target);
+            // size of matrix (starting from 0)
             i = costs[0].size() - 1;
             j = costs.size() - 1;
             MatrixSearchable m;
@@ -62,10 +70,14 @@ namespace test1 { // ? delete it
             pair<int, int> size(i, j);
             m.setSize(size);
             m.setCosts(&costs);
+            // find a path from start cell to target cell using DFS
             DFS<pair<int, int>> dfs;
             vector<State<pair<int,int>>*> resPath = dfs.search(&m);
             string direction;
+            int count = 0;
+            // print to console the path
             while (!resPath.empty()) {
+                count++;
                 auto s = resPath[resPath.size()-1];
                 resPath.pop_back();
                 auto parent = s->getCameFrom();
@@ -80,8 +92,10 @@ namespace test1 { // ? delete it
                 } else if (parent->getState().second == s->getState().second - 1) {
                     direction = "Right";
                 }
-                cout << "Direction:" + direction +  "; Location: [" + to_string(s->getState().first) + ", " + to_string(s->getState().second) + "];" + "Total cost: " + to_string(s->getCost()) << endl;
+                cout << "Direction: " + direction +  ";    Location: [" + to_string(s->getState().first) + ", " +
+                to_string(s->getState().second) + "];      " + "Total cost: " + to_string(s->getCost()) << endl;
             }
+            cout << "Total cells visited: " + to_string(count);
             return 0;
         }
     };
