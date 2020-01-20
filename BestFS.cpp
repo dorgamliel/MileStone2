@@ -3,7 +3,3 @@
 //
 
 #include "BestFS.h"
-template <typename T>
-void BestFS<T>::search(Searchable<T>* searchable){
-
-}
