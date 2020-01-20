@@ -9,6 +9,7 @@
 #include <sstream>
 #include "Searchable.h"
 #include "DFS.h"
+#include "SearcherAdapter.h"
 
 class MatrixSearchable : public Searchable<pair<int, int>> {
     pair<int, int> size;
@@ -72,6 +73,7 @@ namespace test1 { // ? delete it
             m.setCosts(&costs);
             // find a path from start cell to target cell using DFS
             DFS<pair<int, int>> dfs;
+            SearcherAdapter<pair<int, int>>* sa = new SearcherAdapter<pair<int, int>>(&dfs);
             vector<State<pair<int,int>>*> resPath = dfs.search(&m);
             string direction;
             int count = 0;

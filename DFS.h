@@ -29,7 +29,7 @@ public:
             return vec;
         }
         // iterate through neighbours and try to find a path to target vertex
-        for (auto s : allNeighbours) {
+        for (State<T>* s : allNeighbours) {
             T vertex = s->getState();
             // if this neighbour has not been visited yet
             if (visited.find(vertex) == visited.end()) {

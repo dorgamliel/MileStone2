@@ -1,3 +1,4 @@
+/*
 //
 // Created by dorgamliel on 14/01/2020.
 //
@@ -35,7 +36,9 @@ class BestFS : public Searcher<T> {
                     s.setCameFrom(currentState);
                     pq.push(s);
                 } else {
-                    if (/*if new path is better than previous one*/){ //?? check implementation of getCost of matrixsearchable ??
+                    if (*/
+/*if new path is better than previous one*//*
+){ //?? check implementation of getCost of matrixsearchable ??
                         if (visited.find(vertex) == visited.end()){
                             visited[s->getState()] = true;
                             pq.push(s);
@@ -62,3 +65,4 @@ class BestFS : public Searcher<T> {
 
 
 #endif //MILESTONE2_BESTFS_H
+*/
