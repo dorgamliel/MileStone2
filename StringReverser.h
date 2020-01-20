@@ -12,8 +12,8 @@ using namespace std;
 
 class StringReverser : public Solver<string, string>{
 public:
-    string solveProblem();
-    void setProblem(string);
+    string* solveProblem();
+    void setProblem(string*);
 };
 
 
