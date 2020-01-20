@@ -48,6 +48,7 @@ public:
                 }
             }
         }
+        //
         // reaching this code means current vertex has neighbours but they have all been visited in the past and
         // therefore it is useless to visit them again, meaning we reached a dead end, therefore returning
         // an empty path
