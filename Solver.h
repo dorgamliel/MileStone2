@@ -7,11 +7,11 @@
 template <typename P, typename S>
 class Solver {
 protected:
-    P* problem;
-    S* solution;
+    P problem;
+    S solution;
 public:
-    virtual S* solveProblem() = 0;
-    virtual void setProblem(P*) = 0;
+    virtual S solveProblem() = 0;
+    virtual void setProblem(P) = 0;
 };
 
 

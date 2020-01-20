@@ -8,7 +8,7 @@
 #include "Solver.h"
 #include "Searcher.h"
 template <typename T>
-class SearcherAdapter : public Solver<Searchable<T>, vector<State<T>*>> {
+class SearcherAdapter : public Solver<Searchable<T>*, vector<State<T>*>> {
     Searcher<T>* searcher;
  public:
     SearcherAdapter(Searcher<T>* searcher) {

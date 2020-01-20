@@ -74,7 +74,8 @@ namespace test1 { // ? delete it
             // find a path from start cell to target cell using DFS
             DFS<pair<int, int>> dfs;
             SearcherAdapter<pair<int, int>>* sa = new SearcherAdapter<pair<int, int>>(&dfs);
-            vector<State<pair<int,int>>*> resPath = dfs.search(&m);
+            sa->setProblem(&m);
+            vector<State<pair<int,int>>*> resPath = sa->solveProblem();
             string direction;
             int count = 0;
             // print to console the path
