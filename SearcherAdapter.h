@@ -22,6 +22,11 @@ class SearcherAdapter : public Solver<Searchable<T>*, vector<State<T>*>> {
         this->solution = this->searcher->search(this->problem);
         return this->solution;
     }
+
+    Solver<Searchable<T>*, vector<State<T>*>>* clone() {
+        Searcher<T>* newSearcher = this->searcher->clone();
+        return new SearcherAdapter(newSearcher);
+    }
 };
 
 

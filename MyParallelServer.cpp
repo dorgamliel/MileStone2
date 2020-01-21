@@ -1,24 +1,24 @@
 //
-// Created by dorgamliel on 09/01/2020.
+// Created by alon on 21/01/2020.
 //
 
+#include "MyParallelServer.h"
+#include <unistd.h>
 #include <netinet/in.h>
 #include <iostream>
-#include <unistd.h>
-#include "MySerialServer.h"
-#include "MyTestClientHandler.h"
-#include "MyClientHandler.h"
-#include "MyParallelServer.h"
+#include <vector>
+#include <thread>
 
 #define MAX_WAIT 5
 
-void MySerialServer:: start(int port, ClientHandler* c) {
+void MyParallelServer::start(int port, ClientHandler* c) {
     server_socket = socket(AF_INET, SOCK_STREAM, 0);
     sockaddr_in address;
     address.sin_family = AF_INET;
     address.sin_addr.s_addr = INADDR_ANY; //give me any IP allocated for my machine
     address.sin_port = htons(port);
     int addrlen = sizeof(address);
+    vector<thread> threadVec;
     //we need to convert our number
     // to a number that the network understands.
     //the actual bind command
@@ -44,23 +44,19 @@ void MySerialServer:: start(int port, ClientHandler* c) {
             std::cerr << "Error accepting client" << std::endl;
         } else {
             std::cout << "connected to client" << std::endl;
-            c->handleClient();
+            ClientHandler* newC = c->clone();
+            newC->setClientSocket(c->getClientSocket());
+            threadVec.push_back(thread(&ClientHandler::handleClient, newC));
         }
+    }
+    for (thread& t : threadVec) {
+        t.join();
     }
     stop();
 }
-void MySerialServer::stop() {
+
+
+
+void MyParallelServer::stop() {
     close(server_socket);
 }
-
-namespace boot{
-    int Main::main(int argc, char *argv[]) {
-        DFS<pair<int, int>> dfs;
-        auto* solver = new SearcherAdapter<pair<int, int>>(&dfs);
-        auto* c = new MyClientHandler(solver);
-        MyParallelServer server;
-        server.start(5600, c);
-    }
-
-};
-

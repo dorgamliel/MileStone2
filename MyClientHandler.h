@@ -7,6 +7,7 @@
 
 #include <sstream>
 #include <unistd.h>
+#include <cstring>
 #include "ClientHandler.h"
 #include "Searchable.h"
 #include "MatrixSearchable.h"
@@ -72,6 +73,13 @@ class MyClientHandler : public ClientHandler {
                 }
                 cout << solution << endl;
                 cout << "Total cells visited: " + to_string(count) << endl;
+                char* toSend = new char[solution.size()+1];
+                strcpy(toSend, solution.c_str());
+                int is_sent = send(client_socket , toSend , strlen(toSend) , 0);
+                if (is_sent == -1) {
+                    std::cout<<"Error sending message"<<std::endl;
+                }
+                // PRINT SOLUTION TO FILE INSTEAD OF CONSOLE
             }
             this->is_done = true;
         }
@@ -124,6 +132,13 @@ class MyClientHandler : public ClientHandler {
     m.setCosts(costs);
     return m;
     // COSTS AND STATES OF MATRIX DISAPPEAR ONCE OUT OF FUNCTIONS
+    }
+
+
+    ClientHandler* clone() {
+        auto newSolver = this->solver->clone();
+        MyClientHandler* newC = new MyClientHandler(newSolver);
+        return newC;
     }
 
 };

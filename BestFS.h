@@ -87,6 +87,11 @@ class BestFS : public Searcher<T> {
             pq.pop();
         }
     }
+
+
+    Searcher<T>* clone() {
+        return new BestFS<T>();
+    }
 };
 
 

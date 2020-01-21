@@ -44,6 +44,11 @@ public:
         }
 
     }
+
+
+    Searcher<T>* clone() {
+        return new BFS<T>();
+    }
 };
 
 
