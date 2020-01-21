@@ -4,9 +4,10 @@
 
 #ifndef MILESTONE2_BFS_H
 #define MILESTONE2_BFS_H
+#include "Searcher.h"
 
-
-class BFS {
+template <typename T>
+class BFS : public Searcher<T>{
 
 };
 
