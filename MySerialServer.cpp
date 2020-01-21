@@ -1,4 +1,3 @@
-/*
 //
 // Created by dorgamliel on 09/01/2020.
 //
@@ -8,6 +7,7 @@
 #include <unistd.h>
 #include "MySerialServer.h"
 #include "MyTestClientHandler.h"
+#include "MyClientHandler.h"
 
 #define MAX_WAIT 5
 
@@ -54,13 +54,12 @@ void MySerialServer::stop() {
 
 namespace boot{
     int Main::main(int argc, char *argv[]) {
-        auto* cache = new FileCacheManager();
-        auto* solver = new StringReverser();
-        auto* c = new MyTestClientHandler(solver, cache);
+        DFS<pair<int, int>> dfs;
+        auto* solver = new SearcherAdapter<pair<int, int>>(&dfs);
+        auto* c = new MyClientHandler(solver);
         MySerialServer server;
-        server.start(5401, c);
+        server.start(5600, c);
     }
 
 };
 
-*/

@@ -25,6 +25,7 @@ class BestFS : public Searcher<T> {
         vector<State<T>*> vecForPQ;
         map<T, double> visited;
         State<T> *currentState = searchable->getInitialState();
+        currentState->setCost(searchable->getCost(NULL, currentState));
         //priority_queue<State<T>*> pq;
         //priority_queue <State<T>*, vector<State<T>*>, greater<State<T>*> > pq;
         priority_queue <State<T>*, vector<State<T>*>, CompareCost<T>> pq;
@@ -36,7 +37,7 @@ class BestFS : public Searcher<T> {
             pq.pop();
             closed.push_back(currentState);
             if (searchable->isGoalState(currentState)) {
-                return createPath(currentState);
+                return this->createPath(currentState);
             }
             vector<State<T>*> neighbours = searchable->getNeighbours(currentState);
             //iterate current state's neighbours and push to priority queue if not visited already.

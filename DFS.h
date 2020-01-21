@@ -12,6 +12,7 @@ class DFS : public Searcher<T>{
 public:
   vector<State<T>*> search(Searchable<T>* searchable){
       State<T>* start = searchable->getInitialState();
+      start->setCost(searchable->getCost(NULL, start));
       map<T, bool> visited;
       return DFSOper(start, searchable, visited);
   }

@@ -1,4 +1,3 @@
-/*
 //
 // Created by alon on 20/01/2020.
 //
@@ -7,19 +6,19 @@
 #define MILESTONE2__MYCLIENTHANDLER_H_
 
 #include <sstream>
+#include <unistd.h>
 #include "ClientHandler.h"
 #include "Searchable.h"
-template <typename T>
+#include "MatrixSearchable.h"
 class MyClientHandler : public ClientHandler {
-    Solver<Searchable<T>*, vector<State<T>>> solver;
+    Solver<Searchable<pair<int, int>>*, vector<State<pair<int, int>>*>>* solver;
 
  public:
-    MyClientHandler(Solver<Searchable<T>*, vector<State<T>>> s) {
+    MyClientHandler(Solver<Searchable<pair<int, int>>*, vector<State<pair<int, int>>*>>* s) {
         this->solver = s;
     }
 
     void handleClient() {
-        string solution;
         string matrix;
         std::istringstream valueStream;
         is_done = false;
@@ -28,36 +27,105 @@ class MyClientHandler : public ClientHandler {
         int buffSize = sizeof(buffer);
         // continues as long as the script is running
         while (!isDone()) {
-            read(this->client_socket, buffer, buffSize);
-            matrix += buffer;
             string str = buffer;
-            // checks if a bad message syntax was sent by simulator
-            if (str.empty()) {
-                continue;
+            while (str.find("end") != 0) {
+                read(this->client_socket, buffer, buffSize);
+                matrix += buffer;
+                str = buffer;
+                fill_n(buffer, sizeof(buffer), 0);
             }
-            if (str.find("end") == 0){
-                is_done = true;
-                continue;
-            }
-            valueStream = istringstream(str);
-            getline(valueStream, str);
+            // USE HASH ON 'MATRIX'
+
             //try getting solution from existing file.
             try{
-                //searching in cache and in directory.
-                solution = cm->get(str);
-                cout<<"found in cache. " <<solution<<endl;
+                // TRY TO GET MATRIX FROM CACHE/FILE
+                throw "no cache for now";
             } catch(const char* e) {
-                solver->setProblem(str);
-                solution = solver->solveProblem();
-                cm->insert(str, solution);
-                cout<<"Created a new file. " <<solution<<endl;
+                MatrixSearchable m = createMatrix(&matrix);
+                 //SHOULD BE BEST SEARCH ALGORITHM (PROBABLY A*)
+                this->solver->setProblem(&m);
+                vector<State<pair<int,int>>*> resPath = this->solver->solveProblem();
+                string direction;
+                string solution;
+                int count = 0;
+                // print to console the path
+                while (!resPath.empty()) {
+                    count++;
+                    auto s = resPath[resPath.size()-1];
+                    resPath.pop_back();
+                    auto parent = s->getCameFrom();
+                    if (parent == NULL) {
+                        direction = "";
+                    } else if (parent->getState().first == s->getState().first + 1) {
+                        direction = "Up";
+                    } else if (parent->getState().first == s->getState().first - 1) {
+                        direction = "Down";
+                    } else if (parent->getState().second == s->getState().second + 1) {
+                        direction = "Left";
+                    } else if (parent->getState().second == s->getState().second - 1) {
+                        direction = "Right";
+                    }
+                    solution += direction;
+                    solution += "(";
+                    solution += to_string(s->getCost());
+                    solution += "), ";
+                }
+                cout << solution << endl;
+                cout << "Total cells visited: " + to_string(count) << endl;
             }
-            fill_n(buffer, sizeof(buffer), 0);
+            this->is_done = true;
         }
         close(this->client_socket);
+    }
+
+
+    MatrixSearchable createMatrix(string* matrix) {
+        string line;
+        istringstream lineStream;
+        istringstream  valueStream;
+        string singleValue;
+        string singleLine;
+        vector<vector<int>>* costs = new vector<vector<int>>();
+        vector<int>* singleRow = new vector<int>();
+
+
+        lineStream = istringstream(*matrix);
+        while (std::getline(lineStream, singleLine, '\n')) {
+            if (singleLine == "end") {
+                continue;
+            }
+            valueStream = istringstream(singleLine);
+            while (std::getline(valueStream, singleValue, ','))
+            {
+                singleRow->push_back(stoi(singleValue));
+            }
+            costs->push_back(*singleRow);
+            singleRow->clear();
+
+        }
+        // split each line into cells and put each cell cost into 'costs' vector
+    // get start and target cells, and remove
+    pair<int, int> target((*costs)[costs->size()-1][0], (*costs)[costs->size()-1][1]);
+    pair<int, int> start((*costs)[costs->size()-2][0], (*costs)[costs->size()-2][1]);
+    // remove start and target info lines from 'costs' vector
+    costs->pop_back();
+    costs->pop_back();
+    // initialize searchable matrix problem
+    State<pair<int, int>>* startState = new State<pair<int, int>>(start);
+    State<pair<int, int>>* targetState = new State<pair<int, int>>(target);
+    // size of matrix (starting from 0)
+    int i = (*costs)[0].size() - 1;
+    int j = costs->size() - 1;
+    MatrixSearchable m;
+    m.setInitialState(startState);
+    m.setGoalState(targetState);
+    pair<int, int> size(i, j);
+    m.setSize(size);
+    m.setCosts(costs);
+    return m;
+    // COSTS AND STATES OF MATRIX DISAPPEAR ONCE OUT OF FUNCTIONS
     }
 
 };
 
 #endif //MILESTONE2__MYCLIENTHANDLER_H_
-*/

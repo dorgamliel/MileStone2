@@ -10,6 +10,7 @@
 #include "Searchable.h"
 #include "DFS.h"
 #include "SearcherAdapter.h"
+#include "BestFS.h"
 
 class MatrixSearchable : public Searchable<pair<int, int>> {
     pair<int, int> size;
@@ -72,7 +73,7 @@ namespace test1 { // ? delete it
             m.setSize(size);
             m.setCosts(&costs);
             // find a path from start cell to target cell using DFS
-            DFS<pair<int, int>> dfs;
+            BestFS<pair<int, int>> dfs;
             SearcherAdapter<pair<int, int>>* sa = new SearcherAdapter<pair<int, int>>(&dfs);
             sa->setProblem(&m);
             vector<State<pair<int,int>>*> resPath = sa->solveProblem();
