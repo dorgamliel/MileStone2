@@ -78,16 +78,6 @@ class BestFS : public Searcher<T> {
         }
     }
 
-    vector<State<T>*> createPath(State<T> *goal) { //?? move it to searcher.h ?
-        vector<State<T> *> path;
-        State<T>* s = goal;
-        while (s != NULL) {
-            path.push_back(s);
-            s = s->getCameFrom();
-        }
-        return path;
-    }
-
     bool isInPQ(priority_queue <State<T>*, vector<State<T>*>, CompareCost<T>> pq, State<T>* s){
         while (!pq.empty()){
             if (pq.top()->getState() == s->getState()){

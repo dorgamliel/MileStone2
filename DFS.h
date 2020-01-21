@@ -18,7 +18,7 @@ public:
   vector<State<T>*> DFSOper(State<T>* state, Searchable<T>* searchable , map<T, bool> visited) {
         // if reached target vertex, return the path from start vertex to target vertex
         if (searchable->isGoalState(state)) {
-            return createPath(state);
+            return Searcher<T>::createPath(state);
         }
         // mark this vertex as visited
         visited[state->getState()] = true;
@@ -74,17 +74,6 @@ public:
                 DFSOper(neighbour, searchable, visited);
             }
         }*/
-    }
-
-    //  iterate through vertex's parents in order to create a path from start vertex to target vertex
-    vector<State<T>*> createPath(State<T> *goal) {
-        vector<State<T> *> path;
-        State<T>* s = goal;
-        while (s != NULL) {
-            path.push_back(s);
-            s = s->getCameFrom();
-        }
-        return path;
     }
 };
 
