@@ -10,6 +10,7 @@
 #include "Searchable.h"
 #include "DFS.h"
 #include "SearcherAdapter.h"
+#include "BestFS.h"
 
 class MatrixSearchable : public Searchable<pair<int, int>> {
     pair<int, int> size;

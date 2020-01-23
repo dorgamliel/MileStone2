@@ -6,38 +6,36 @@
 #define MILESTONE2_DFS_H
 
 #include <map>
+#include <set>
+
 #include "Searcher.h"
 template<typename T>
 class DFS : public Searcher<T>{
 public:
   vector<State<T>*> search(Searchable<T>* searchable){
       State<T>* start = searchable->getInitialState();
-      map<T, bool> visited;
-      return DFSOper(start, searchable, visited);
+      start->setCost(searchable->getCost(NULL, start));
+      set<T> vis;
+      return DFSOper(start, searchable, &vis);
   }
-  vector<State<T>*> DFSOper(State<T>* state, Searchable<T>* searchable , map<T, bool> visited) {
+  vector<State<T>*> DFSOper(State<T>* state, Searchable<T>* searchable , set<T>* vis) {
         // if reached target vertex, return the path from start vertex to target vertex
         if (searchable->isGoalState(state)) {
             return Searcher<T>::createPath(state);
         }
         // mark this vertex as visited
-        visited[state->getState()] = true;
+        vis->insert(state->getState());
         vector<State<T>*> allNeighbours = searchable->getNeighbours(state);
-        // if the neighbour list is empty, we have reached a dead end, and we will return empty vector
-        if (allNeighbours.empty()) {
-            vector<State<T>*> vec;
-            return vec;
-        }
         // iterate through neighbours and try to find a path to target vertex
         for (State<T>* s : allNeighbours) {
             T vertex = s->getState();
             // if this neighbour has not been visited yet
-            if (visited.find(vertex) == visited.end()) {
+            if (vis->find(vertex) == vis->end()) {
                 // set the total cost to get to this neighbour and current vertex to be neighbours parent
                 s->setCost(state->getCost() + searchable->getCost(state, s));
                 s->setCameFrom(state);
                 // run DFS recursively on the neighbour vertex
-                auto path = DFSOper(s, searchable, visited);
+                auto path = DFSOper(s, searchable, vis);
                 // if the path is empty, it means we have reached a dead end, so we will try to find a path
                 // to target vertex from the next neighbour, otherwise, meaning we found a path from the neighbour
                 // to target vertex, we will return the total path from start vertex to target vertex
@@ -75,6 +73,11 @@ public:
             }
         }*/
     }
+
+
+    Searcher<T>* clone() {
+      return new DFS<T>();
+  }
 };
 
 

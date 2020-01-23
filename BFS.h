@@ -14,6 +14,7 @@ class BFS : public Searcher<T>{
 public:
     vector<State<T>*> search(Searchable<T>* searchable) {
         State<T>* state = searchable->getInitialState();
+        state->setCost(searchable->getCost(NULL, state));
         queue<State<T>*> queue;
         map<T, bool> visited;
         visited[state->getState()] = true;
@@ -42,6 +43,11 @@ public:
             }
         }
 
+    }
+
+
+    Searcher<T>* clone() {
+        return new BFS<T>();
     }
 };
 

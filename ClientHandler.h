@@ -19,6 +19,7 @@ public:
     void setClientSocket(int s){ client_socket = s;}
     int getClientSocket() { return client_socket; }
     bool isDone() { return is_done; }
+    virtual ClientHandler* clone() = 0;
 };
 
 

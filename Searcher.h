@@ -22,6 +22,9 @@ public:
         }
         return path;
     }
+
+
+    virtual Searcher* clone() = 0;
 };
 
 

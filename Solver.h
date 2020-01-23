@@ -12,6 +12,7 @@ protected:
 public:
     virtual S solveProblem() = 0;
     virtual void setProblem(P) = 0;
+    virtual Solver* clone() = 0;
 };
 
 
