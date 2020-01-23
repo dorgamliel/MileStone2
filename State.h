@@ -32,7 +32,7 @@ public:
         return this->cameFrom;
     }
     int getHeuristicCost(){return this->heuristicCost;}
-    void setHeuristicCost(int c){ this->getHeuristicCost() = c;}
+    void setHeuristicCost(int c){ this->heuristicCost = c;}
 };
 
 

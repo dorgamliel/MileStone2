@@ -17,7 +17,8 @@ class MatrixSearchable : public Searchable<pair<int, int>> {
     vector<vector<int>>* costs;
 public:
     vector<State<pair<int,int>>*> getNeighbours(State<pair<int, int>>* s) override;
-    //int getNumberOfStates();
+    int getDistancefromEnd(pair<int, int> state);
+        //int getNumberOfStates();
     //void addToTotalCost();
     void setSize(pair<int, int>);
     double getCost(State<pair<int, int>>*, State<pair<int, int>>*) override;

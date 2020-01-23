@@ -13,6 +13,8 @@ template<typename T>
 struct CompareCost {
     bool operator()(State<T>* const& state1, State<T>* const& state2)
     {
+        // return "true" if "p1" is ordered
+        // before "p2", for example:
         return state1->getCost()>state2->getCost();
     }
 };
@@ -23,12 +25,9 @@ class BestFS : public Searcher<T> {
         vector<State<T>*> vecForPQ;
         map<T, double> visited;
         State<T> *currentState = searchable->getInitialState();
-<<<<<<< HEAD
-=======
         currentState->setCost(searchable->getCost(NULL, currentState));
         //priority_queue<State<T>*> pq;
         //priority_queue <State<T>*, vector<State<T>*>, greater<State<T>*> > pq;
->>>>>>> 9c360b3a728775ac2d2e3b55a8bb21a7de8f1f3c
         priority_queue <State<T>*, vector<State<T>*>, CompareCost<T>> pq;
         vector<State<T> *> closed;
         pq.push(currentState);
@@ -38,11 +37,7 @@ class BestFS : public Searcher<T> {
             pq.pop();
             closed.push_back(currentState);
             if (searchable->isGoalState(currentState)) {
-<<<<<<< HEAD
-                return Searcher<T>::createPath(currentState);
-=======
                 return this->createPath(currentState);
->>>>>>> 9c360b3a728775ac2d2e3b55a8bb21a7de8f1f3c
             }
             vector<State<T>*> neighbours = searchable->getNeighbours(currentState);
             //iterate current state's neighbours and push to priority queue if not visited already.
@@ -62,11 +57,11 @@ class BestFS : public Searcher<T> {
                     if (visited[s->getState()] > currentState->getCost() + searchable->getCost(currentState, s)){
                         //if neighbour is not in priority queue, add it to it.
                         if (!isInPQ(pq, s)){
+                            s->setCost(currentState->getCost() + searchable->getCost(currentState, s));
                             visited[s->getState()] = s->getCost();
                             s->setCameFrom(currentState);
                             pq.push(s);
                         } else { // adjust priority in queue.
-                            //empty queue untill reaching relevant state.
                             while(pq.top()->getState() != s->getState()) {
                                 auto top = pq.top();
                                 vecForPQ.push_back(pq.top());
@@ -74,7 +69,6 @@ class BestFS : public Searcher<T> {
                             }
                             vecForPQ.push_back(pq.top());
                             pq.pop();
-                            //put back all stated into pq.
                             while(!vecForPQ.empty()){
                                 pq.push(vecForPQ.back());
                                 vecForPQ.pop_back();
