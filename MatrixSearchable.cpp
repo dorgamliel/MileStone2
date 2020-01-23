@@ -5,6 +5,7 @@
 #include "MatrixSearchable.h"
 
 #include <utility>
+#include <cmath>
 #include "DFS.h"
 
 vector<State<pair<int, int>>*> MatrixSearchable::getNeighbours(State<pair<int, int>>* s){
@@ -68,4 +69,14 @@ double MatrixSearchable::getCost(State<pair<int, int>> *origin, State<pair<int, 
 // set the costs table
 void MatrixSearchable::setCosts(vector<vector<int>>* c) {
     this->costs = c;
+}
+
+int MatrixSearchable::getDistancefromEnd(pair<int, int> state) {
+    int x_current = state.first;
+    int y_current = state.second;
+    int x_goal = this->getGoalState()->getState().first;
+    int y_goal = this->getGoalState()->getState().second;
+    int x_distance = abs(x_current - x_goal);
+    int y_distance = abs(y_current - y_goal);
+    return sqrt(pow(x_distance, 2)+pow(y_distance, 2));
 }

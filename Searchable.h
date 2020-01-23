@@ -14,16 +14,12 @@ using namespace std;
 
 template <typename T>
 class Searchable {
-    string path;
     State<T>* initialState;
     State<T>* goalState;
 public:
     virtual vector<State<T>*> getNeighbours(State<T>* s) = 0;
     virtual double getCost(State<T>*, State<T>*) = 0;
-    //virtual int getNumberOfStates() = 0;
-    //virtual void addToTotalCost() = 0;
-    //virtual string getPath() = 0;
-    //virtual int getTotalCost() = 0;
+    State<T>* getGoalState() {return goalState;}
     State<T>* getInitialState() {
         return this->initialState;
     }
@@ -36,6 +32,7 @@ public:
     void setGoalState(State<T>* s) {
         this->goalState = s;
     }
+    virtual int getDistancefromEnd(T) = 0;
 
 };
 

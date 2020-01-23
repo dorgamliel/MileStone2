@@ -14,6 +14,7 @@ class State {
     T state;
     int cost = 0;
     State<T>* cameFrom = NULL;
+    int heuristicCost = 0;
 public:
     State(T state){ this->state = state; }
     T getState(){ return this->state; }
@@ -30,6 +31,8 @@ public:
     State<T>* getCameFrom() {
         return this->cameFrom;
     }
+    int getHeuristicCost(){return this->heuristicCost;}
+    void setHeuristicCost(int c){ this->getHeuristicCost() = c;}
 };
 
 
