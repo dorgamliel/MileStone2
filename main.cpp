@@ -18,7 +18,7 @@ int main(int argc, char* argv[]) {
     AStar<pair<int, int>> astar;
     BFS<pair<int, int>> bfs;
     BestFS<pair<int, int>> best;
-    auto* solver = new SearcherAdapter<pair<int, int>>(&bfs);
+    auto* solver = new SearcherAdapter<pair<int, int>>(&astar);
     auto* c = new MyClientHandler(solver);
     MyParallelServer server;
     server.start(port, c);
