@@ -13,10 +13,12 @@
 #include "MatrixSearchable.h"
 class MyClientHandler : public ClientHandler {
     Solver<Searchable<pair<int, int>>*, vector<State<pair<int, int>>*>>* solver;
+    FileCacheManager* cm;
 
- public:
+public:
     MyClientHandler(Solver<Searchable<pair<int, int>>*, vector<State<pair<int, int>>*>>* s) {
         this->solver = s;
+        this->cm = new FileCacheManager();
     }
 
     void handleClient() {
@@ -40,7 +42,8 @@ class MyClientHandler : public ClientHandler {
             //try getting solution from existing file.
             try{
                 // TRY TO GET MATRIX FROM CACHE/FILE
-                throw "no cache for now";
+                string stFromCache = cm->get(matrix);
+                cout<<"found in cache. " <<stFromCache<<endl;
             } catch(const char* e) {
                 MatrixSearchable m = createMatrix(&matrix);
                  //SHOULD BE BEST SEARCH ALGORITHM (PROBABLY A*)
@@ -79,7 +82,12 @@ class MyClientHandler : public ClientHandler {
                 if (is_sent == -1) {
                     std::cout<<"Error sending message"<<std::endl;
                 }
-                // PRINT SOLUTION TO FILE INSTEAD OF CONSOLE
+                //create hash function to calculate file name.
+                hash<string> h;
+                size_t hash = h(matrix);
+                //create a file with solution in it.
+                cm->insert(to_string(hash), solution);
+                cout<<"Created a new file. " <<solution<<endl;
             }
             this->is_done = true;
         }

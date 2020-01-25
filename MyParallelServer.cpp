@@ -9,7 +9,7 @@
 #include <vector>
 #include <thread>
 
-#define MAX_WAIT 5
+#define MAX_WAIT 120
 
 void MyParallelServer::start(int port, ClientHandler* c) {
     server_socket = socket(AF_INET, SOCK_STREAM, 0);

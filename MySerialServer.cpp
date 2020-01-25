@@ -9,8 +9,10 @@
 #include "MyTestClientHandler.h"
 #include "MyClientHandler.h"
 #include "MyParallelServer.h"
+#include "AStar.h"
+#include "BFS.h"
 
-#define MAX_WAIT 5
+#define MAX_WAIT 120
 
 void MySerialServer:: start(int port, ClientHandler* c) {
     server_socket = socket(AF_INET, SOCK_STREAM, 0);
@@ -56,10 +58,13 @@ void MySerialServer::stop() {
 namespace boot{
     int Main::main(int argc, char *argv[]) {
         DFS<pair<int, int>> dfs;
-        auto* solver = new SearcherAdapter<pair<int, int>>(&dfs);
+        AStar<pair<int, int>> astar;
+        BFS<pair<int, int>> bfs;
+        BestFS<pair<int, int>> best;
+        auto* solver = new SearcherAdapter<pair<int, int>>(&bfs);
         auto* c = new MyClientHandler(solver);
         MyParallelServer server;
-        server.start(5600, c);
+        server.start(5402, c);
     }
 
 };

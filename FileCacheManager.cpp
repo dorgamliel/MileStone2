@@ -24,12 +24,14 @@ void FileCacheManager::insert(string key, string obj){
 }
 //returns the object.
 string FileCacheManager::get(string key){
+    hash<string> h;
+    size_t hash = h(key);
     auto iter = _cacheMap.find(key);
     //if object not fount in cache
     if (iter == _cacheMap.end()) {
         string obj;
         //look up in filesystem. if not found return -1.
-        string fileName(key);
+        string fileName(to_string(hash));
         ifstream file(fileName,ios::binary);
         if (!file) {
             throw "File does not exist.";
