@@ -43,7 +43,12 @@ public:
             try{
                 // TRY TO GET MATRIX FROM CACHE/FILE
                 string stFromCache = cm->get(matrix);
-                cout<<"found in cache. " <<stFromCache<<endl;
+                char* toSend = new char[stFromCache.size()+1];
+                strcpy(toSend, stFromCache.c_str());
+                int is_sent = send(client_socket , toSend , strlen(toSend) , 0);
+                if (is_sent == -1) {
+                    std::cout<<"Error sending message"<<std::endl;
+                }
             } catch(const char* e) {
                 MatrixSearchable m = createMatrix(&matrix);
                  //SHOULD BE BEST SEARCH ALGORITHM (PROBABLY A*)
@@ -74,8 +79,6 @@ public:
                     solution += to_string(s->getCost());
                     solution += "), ";
                 }
-                cout << solution << endl;
-                cout << "Total cells visited: " + to_string(count) << endl;
                 char* toSend = new char[solution.size()+1];
                 strcpy(toSend, solution.c_str());
                 int is_sent = send(client_socket , toSend , strlen(toSend) , 0);
