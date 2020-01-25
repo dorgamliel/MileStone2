@@ -8,9 +8,11 @@
 #include <sstream>
 #include <unistd.h>
 #include <cstring>
+#include <sys/socket.h>
 #include "ClientHandler.h"
 #include "Searchable.h"
 #include "MatrixSearchable.h"
+#include "FileCacheManager.h"
 class MyClientHandler : public ClientHandler {
     Solver<Searchable<pair<int, int>>*, vector<State<pair<int, int>>*>>* solver;
     FileCacheManager* cm;
