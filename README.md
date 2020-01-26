@@ -17,4 +17,6 @@ The output will be the best path from Starting point to goal point, which includ
 
 In addition, there is a PDF attached, with an analasys of all of the following algorithms: DFS, BFS, Best First Search and A*.
 
+_note_: SafeQueue and ThreadPool classes were taken from the web.
+
 **An important remark:** As written above, this project is in the making.  For now, only the first and second parts of the whole project are complete. All of the description above relates to the current milestone.
