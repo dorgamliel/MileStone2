@@ -92,7 +92,6 @@ public:
                 size_t hash = h(matrix);
                 //create a file with solution in it.
                 cm->insert(to_string(hash), solution);
-                cout<<"Created a new file. " <<solution<<endl;
             }
             this->is_done = true;
         }
