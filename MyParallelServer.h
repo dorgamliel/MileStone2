@@ -4,7 +4,9 @@
 
 #ifndef MILESTONE2__MYPARALLELSERVER_H_
 #define MILESTONE2__MYPARALLELSERVER_H_
+#include <thread>
 #include "Server.h"
+#include <vector>
 
 class MyParallelServer : public server_side::Server {
 
@@ -15,6 +17,7 @@ class MyParallelServer : public server_side::Server {
 
     void start(int, ClientHandler*);
     void stop();
+    static void startClient(ClientHandler* c);
 
 };
 
