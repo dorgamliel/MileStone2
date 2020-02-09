@@ -7,7 +7,7 @@ _Contributors_: Alonsho, dorgamliel.
 [link](https://github.com/Alonsho/MileStone1) to our GitHub repository.
 
 **Milestone description:** In this milestone, the main focus is solving a search problem with search algorithims.
-The issue is mainly choosing the best search algorithm to solve a certain problem, and eventyally giving a statistic evalluation of each algorithm, so that the comparison between their profitability will be clearere.
+The issue is mainly choosing the best search algorithm to solve a certain problem, and eventyally giving a statistic evaluation of each algorithm, so that the comparison between their profitability will be clearer.
 
 **Compilation instructions:**
 The program receives couple of client simultaniously, which means it handles multiple problems at the same time.
